@@ -118,13 +118,13 @@
                 <div class="form-group col-md-6">
                     <input type="text" name="" id="inputTitulo" class="form-control"
                     placeholder="" aria-describedby="helpId">
-                    <small id="helId" class="text-muted">Título del libro</small>
+                    <small id="helpId" class="text-muted">Título del libro</small>
                 </div>
 
                 <div class="form-group col-md-6">
                     <input type="text" name="" id="inputAutor" class="form-control"
                     placeholder="" aria-describedby="helpId">
-                    <small id="helId" class="text-muted">Nombre del Autor</small>
+                    <small id="helpId" class="text-muted">Nombre del Autor</small>
                 </div>
 
             </form>
@@ -134,6 +134,56 @@
           <div class="modal-footer">
             
             <button type="button" class="btn btn-success btn-lg btn-block" data-dismiss="modal" id="btnAdd"><i class="fas fa-check-circle"></i> Aceptar</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal para editar -->
+    <div
+      class="modal fade"
+      id="modalEdit"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Editar información del libro</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            
+            <form class="d-flex">
+
+                <div class="form-group col-md-6">
+                    <input type="text" name="" id="editTitulo" class="form-control"
+                    placeholder="" aria-describedby="">
+                    <small id="" class="text-muted">Título del libro</small>
+                </div>
+
+                <div class="form-group col-md-6">
+                    <input type="text" name="" id="editAutor" class="form-control"
+                    placeholder="" aria-describedby="">
+                    <small id="" class="text-muted">Nombre del Autor</small>
+                </div>
+
+            </form>
+            
+          </div>
+
+          <div class="modal-footer">
+            
+            <button type="button" class="btn btn-success btn-lg btn-block" data-dismiss="modal" id="btnEdit"><i class="fas fa-check-circle"></i> Aceptar</button>
 
           </div>
         </div>

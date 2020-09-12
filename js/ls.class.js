@@ -63,4 +63,28 @@ class LocalStorageOperation {
         }
         return resultado;
     }
+
+    static buscarId(id){
+        let arrayLibros = this.obtenerLS();
+        let resultado = '';
+        for(let i = 0; i < arrayLibros.length; i++){
+            if(id == arrayLibros[i].id){
+                resultado = arrayLibros[i];
+            }
+        }
+        return resultado;
+    }
+
+    static editarLibro(infoLibro){
+        let arrayLibros = this.obtenerLS();
+        let arrayNuevo = [];
+        for(let i = 0; i < arrayLibros.length; i++ ){
+            if(infoLibro.id == arrayLibros[i].id){
+                arrayNuevo.push(infoLibro);
+            }else{
+                arrayNuevo.push(arrayLibros[i]);
+            }
+        }
+        localStorage.setItem("Libros",JSON.stringify(arrayNuevo));
+    }
 }

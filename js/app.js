@@ -3,12 +3,17 @@ const titulo = document.getElementById("inputTitulo");
 const tabla = document.getElementById("tbody");
 const inputBuscar = document.getElementById("inputBuscar");
 
+const editarAutor = document.getElementById("editAutor");
+const editarTitulo = document.getElementById("editTitulo");
+var idEditar = 0;
+
 const libro = new Libro();
 
 const patern = /^[a-zA-ZÁ-ÿ0-9\s]{3,100}$/;
 
 function eventListener(){
     document.getElementById("btnAdd").addEventListener("click",prepararLibro);
+    document.getElementById("btnEdit").addEventListener("click",editarLibro);
     tabla.addEventListener("click",acciones);
     document.getElementById("btnVaciar").addEventListener("click",vaciarLibreria);
     document.getElementById("buscarLibro").addEventListener("click",buscarLibro);
@@ -84,6 +89,9 @@ function acciones(event){
                 showConfirmButton: false,
                 timer: 1000
               })
+        }else if(event.target.className.includes("btn-success") || event.target.className.includes("fa-edit")){
+            idEditar = libro.editarInput(event.target,editarTitulo,editarAutor);
+            console.log(idEditar);
         }
         // libro.eliminar(event.target.tagName);
     }
@@ -126,5 +134,49 @@ function buscarLibro(event){
             )
         }
         inputBuscar.value = "";
+    }
+}
+
+function editarLibro(){
+    let bandera = false;
+    let arrayLibros = LocalStorageOperation.obtenerLS();
+    for(let i = 0; i < arrayLibros.length; i++){
+        if(editarTitulo.value.trim().toLowerCase() == arrayLibros[i].titulo.trim().toLowerCase() && editarAutor.value.trim().toLowerCase() == arrayLibros[i].autor.trim().toLowerCase()){
+            bandera = true;
+            break;
+        }
+    }
+
+    if((editarAutor.value != '' && editarTitulo.value != '') && (patern.test(editarAutor.value) && patern.test(editarTitulo.value)) && !bandera){
+        const infoLibro = {
+            id: Number(idEditar),
+            titulo: editarTitulo.value.trim(),
+            autor: editarAutor.value.trim(),
+        }
+        libro.editar(infoLibro)
+        LocalStorageOperation.editarLibro(infoLibro);
+        Swal.fire({
+            position: 'center',
+            icon: 'success',
+            title: 'Se ha editado el libro',
+            showConfirmButton: false,
+            timer: 1000
+          })
+    }else if(bandera){
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Libro ya existente',
+            showConfirmButton: false,
+            timer: 1000
+          })
+    }else{
+        Swal.fire({
+            position: 'center',
+            icon: 'error',
+            title: 'Datos no válidos',
+            showConfirmButton: false,
+            timer: 1000
+          })
     }
 }
